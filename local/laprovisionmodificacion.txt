@@ -1,0 +1,49 @@
+alter table reserva add COLUMN montoTotalBs decimal(12,2);
+
+alter table venta add COLUMN pagoBs decimal(12,2),
+add COLUMN pagoUsd decimal(12,2);
+
+ALTER TABLE `venta` ADD totalapagar DECIMAL(12,2) NULL AFTER `pagoUsd`;
+alter table venta add COLUMN cambioBs decimal(12,2),
+add COLUMN cambioUsd decimal(12,2);
+ALTER TABLE `venta` ADD precioBs DECIMAL(12,2) NULL AFTER `cambioUsd`;
+ALTER TABLE `venta` ADD `totalapagarBs` DECIMAL(12,2) NULL AFTER `totalapagar`;
+ALTER TABLE `venta` ADD `moneda` VARCHAR(10) NULL AFTER `precioBs`;
+ALTER TABLE `venta` ADD `reservaBs` DECIMAL(12,2) NULL AFTER `moneda`;
+ALTER table venta  drop COLUMN cuotaInicial;
+alter table plandepago add COLUMN cuotaInicialUsd decimal(12,2),
+add COLUMN cuotaInicialBs decimal(12,2),
+add COLUMN montoTotalBs decimal(12,2),
+
+create table pagocuota(
+    id int PRIMARY key AUTO_INCREMENT,
+    totalPagoBs decimal(12,2),
+    totalPagoUsd decimal(12,2),
+    pagoBs decimal(12,2),
+    pagoUsd decimal(12,2),
+    cambioUsd decimal(12,2),
+    cambioBs decimal(12,2),
+    fecha datetime,                  //cambiado
+    moneda varchar(10),
+    tipoPago char(4),                //cambiado
+    saldoDeuda decimal(9,2),
+    idPlandePago int,
+    foreing key(idPlandePago) references plandepago(id)
+);
+
+ALTER TABLE `transaccionventa` ADD `montoBs` DECIMAL(12,2) NULL AFTER `monto`;
+ALTER TABLE `venta` ADD `tipoVenta` VARCHAR(11) NULL AFTER `reservaBs`;
+ALTER TABLE `reserva` ADD `moneda` VARCHAR(10) NULL AFTER `montoTotalBs`;
+ALTER TABLE `reserva` ADD `formaPago` VARCHAR(11) NULL AFTER `moneda`;
+
+
+ALTER TABLE `cuenta` ADD `id_moneda` INT(11) NULL AFTER `utilizable`;
+ALTER TABLE `cuenta` ADD foreign key(id_moneda) references moneda(id);
+
+ALTER TABLE `transaccionpago` DROP FOREIGN KEY `transaccionpago_ibfk_1`;
+ALTER TABLE `transaccionpago` ADD foreign key(idPago) references pagocuota(id);
+
+alter table cuotas add column montoUsd decimal(12,2);
+
+alter table reserva add column idAsiento int;
+alter table transaccionreserva add column montoBs decimal(12,2);
