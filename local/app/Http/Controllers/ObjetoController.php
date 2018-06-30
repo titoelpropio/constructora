@@ -39,7 +39,8 @@ class ObjetoController extends Controller {
             'tipoobjeto' => $request->tipoObjeto,
             'urlobjeto' => $request->urlObjeto,
             'estado' => $request->habilitado,
-            // 'visibleEnMenu' => $equest->visibleEnMenu,
+            'eliminado' =>0,
+            'visiblemenu' => $request->visibleEnMenu,
             'idmodulo' => $request->modulo
         ]);
         $ultimo = DB::table('objeto')->select('id')->orderby('id', 'DESC')->take(1)->get('id');
@@ -90,7 +91,7 @@ class ObjetoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {            
-        $actua = DB::table('objeto')->where('id', $id)->update(['nombre' => $request->nombre, 'tipoObjeto' => $request->tipoObjeto, 'urlObjeto' => $request->urlObjeto, 'habilitado' => $request->habilitado, 'visibleMenu' => $request->visiblemenu, 'idModulo' => $request->modulo,'nro' => $request->nro]);
+        $actua = DB::table('objeto')->where('id', $id)->update(['nombre' => $request->nombre, 'tipoobjeto' => $request->tipoObjeto, 'urlobjeto' => $request->urlObjeto, 'estado' => $request->habilitado, 'visiblemenu' => $request->visibleEnMenu, 'idmodulo' => $request->modulo]);
         return response()->json(["mensaje" => "listo"]);
     }
     /**

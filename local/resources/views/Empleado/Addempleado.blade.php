@@ -27,6 +27,10 @@
             <input id="nombre" type="text"  length="100">
             <label for="nombre">Nombre: *</label>
         </div>
+          <div class="input-field col s12 m6 l4">
+            <input id="apellido" type="text"  length="100">
+            <label for="input">Apellido: *</label>
+        </div>
         <div class="input-field col s12 m6 l3">
             <input type="text"  id="Docidentidad" length="20">
             <label for="Docidentidad">Documento de identidad: *</label>
@@ -46,51 +50,7 @@
         </div>
     </div>
 
-    <div class="col s12">
-        <div class="input-field col s12 m6 l4">
-            <input type="email"  id="correo">
-            <label  for="email">Correo electronico: *</label>
-        </div>
-        <div class="input-field col s12 m6 l2">                                
-            <input type="text"  id="celular" length="20">
-            <label  for="celular">Celular: *</label>
-        </div>            
-        <div class="input-field col s12 m6 l2">
-            <input type="text"  id="telefonofijo" length="20"> 
-            <label for="telefonofijo">Telefono Fijo: </label>
-        </div>            
-        <div class="input-field col s12 m6 l2">
-            <label for="Cargo"  class="active">Cargo:</label>            
-            <select id="Cargo">
-            </select>
-        </div>            
-        <div class="input-field col s12 m6 l2">
-            <select id="turno">
-            </select>
-            {!!Form::label('turno','Turno:')!!}
-        </div>
-    </div>
 
-    <div class="col s12">
-        <div class="input-field col s12 m6 l12">
-            {!!Form::label('Descuento','Porcentaje de Comision: *')!!}<br><br>
-            <div id="descuento"></div>
-        </div>
-    </div>
-
-
-    <div class="row">
-        <div class="input-field col s12">
-            <div class="row">
-                <div class="input-field col s1">
-                    <i class="mdi-action-history prefix"></i>
-                </div>
-                <div class="col s11">
-
-                </div>
-            </div>
-        </div>
-    </div>
 </form>
     
 <div class="row">

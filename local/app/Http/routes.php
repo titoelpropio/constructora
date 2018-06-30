@@ -128,6 +128,8 @@ Route::resource('Perfil', 'PerfilController');
  Route::get('Gestionarempresa', 'FrontController@Gestionarempresa');
     Route::get('Empleados', 'FrontController@vistaempleado');
 //seguridad
+Route::resource('Empleado','EmpleadoController');
+
 Route::get('Gestionarturno', 'FrontController@Gestionarturno');
 Route::get('GestionarModulo', 'FrontController@Gestionarmodulo');
 Route::get('GestionarObjeto', 'FrontController@Gestionarobjeto');

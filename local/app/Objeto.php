@@ -24,7 +24,7 @@ class Objeto extends Authenticatable implements AuthenticatableContract,
      */
       protected $table = 'objeto';
     protected $fillable = [
-        'nombre','tipoObjeto','urlObjeto','estado','visibleEnMenu','idModulo'
+        'nombre','tipoObjeto','urlObjeto','estado','visiblemenu','idModulo'
     ];
 
     /**

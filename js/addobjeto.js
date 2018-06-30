@@ -131,7 +131,7 @@ function Mostrar(btn) {
         $("#nombres").val(res.nombre);
         $("#tipoObjetos").val(res.tipoobjeto);
         $("#urlObjetos").val(res.urlobjeto);
-        $('#modulos').val(res.idModulo);
+        $('#modulos').val(res.idmodulo);
         $('#modulos').material_select();
     });
 }
@@ -170,20 +170,20 @@ $("#guardar").click(function () {
         var visibleEnMenu = 0;
         var si = document.getElementById('test1').checked;
         var no = document.getElementById('test2').checked;
-        if (si == true) {
+        if (no == true) {
             habilitado = 0;
         }
-        if (no == true) {
+        if (si == true) {
             habilitado = 0;
         } else {
             habilitado = 1;
         }
         var sii = document.getElementById('test3').checked;
         var noo = document.getElementById('test4').checked;
-        if (sii == true) {
+        if (noo == true) {
             visibleEnMenu = 0;
         }
-        if (noo == true) {
+        if (sii == true) {
             visibleEnMenu = 0;
         } else {
             visibleEnMenu = 1;
@@ -218,7 +218,8 @@ $("#guardar").click(function () {
                 tipoObjeto: tipoObjeto,
                 modulo: modulo,
                 urlObjeto: urlObjeto,
-                habilitado: habilitado
+                habilitado: habilitado,
+                visibleEnMenu:visibleEnMenu
             },
             success: function () {
                 $('#tablacategoria').DataTable().destroy();
@@ -268,18 +269,18 @@ $("#actualizar").click(function () {
         var visibleEnMenu = 0;
         var si = document.getElementById('test1s').checked;
         var no = document.getElementById('test2s').checked;
-        if (si == true) {
+        if (no == true) {
             habilitado = 1;
         }
-        if (no == true) {
+        if (si == true) {
             habilitado = 0;
         }
         var sii = document.getElementById('test3s').checked;
         var noo = document.getElementById('test4s').checked;
-        if (sii == true) {
+        if (noo == true) {
             visibleEnMenu = 1;
         }
-        if (noo == true) {
+        if (sii == true) {
             visibleEnMenu = 0;
         }
         var nombre = $("#nombres").val();
@@ -287,7 +288,7 @@ $("#actualizar").click(function () {
         var urlObjeto = $("#urlObjetos").val();
         var modulo = $("#modulos").val();
         var value = $("#idactualizar").val();
-        var route = "/Objeto/"+value;
+        var route = "Objeto/"+value;
         var token = $("#token").val();
         $.ajax({
             url: route,

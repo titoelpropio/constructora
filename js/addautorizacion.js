@@ -2,15 +2,15 @@ var URLactual;
 
 $(document).ready(function () {
     URLactual = window.location.pathname;
-    /*var idd = $('#iddelperfil').val();
+    var idd = $('#iddelperfil').val();
     if (idd == '') {
-        var route = "/";
+        var route = "../";
         window.location.href = route;
-    } else {*/
+    } else {
         var route = "Autorizaciones"// + idd;
-        Cargarpermiso(route);
-       // cargarvistademenu(route);
-    //}
+       Cargarpermiso(route);
+      // cargarvistademenu(route);
+    }
 });
 
 $('#cache').click(function () {
@@ -30,7 +30,9 @@ function Cargarpermiso(route) {
         async: false,
         success: function (result) {
             $.each(result, function (i, value) {
-                if (URLactual == value.urlObjeto) {
+
+
+                if (URLactual == "/contructora/"+value.urlobjeto) {
                       $("#perfilpuedeGuardar").val("1");
                     $("#perfilpuedeEliminar").val("1");
                     $("#perfilpuedeModificar").val("1");

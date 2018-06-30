@@ -35,15 +35,11 @@ class EmpleadoController extends Controller {
      */
     public function store(Request $request) {
         DB::table('empleado')->insert(['nombre' => $request->nombre,
-            'fechaNacimiento' => $request->fechaNacimiento,
+            'fecha_nac' => $request->fechaNacimiento,
+            'apellido' => $request->apellido,
             'genero' => $request->genero,
-            'telefonoFijo' => $request->telefonoFijo,
-            'celular' => $request->celular,
-            'docIdentidad' => $request->docIdentidad,
-            'correoElectronico' => $request->correoElectronico,
-            'idCargo' => $request->idCargo,
-            'idTurno' => $request->idTurno,
-            'comision' => $request->comision
+            'docidentidad' => $request->docIdentidad,
+            'eliminado' => 0
         ]);
         return response()->json($request->all());
     }
@@ -81,15 +77,11 @@ class EmpleadoController extends Controller {
         $actua = DB::table('empleado')
                 ->where('id', $id)
                 ->update(['nombre' => $request->nombre,
-            'fechaNacimiento' => $request->fechaNacimiento,
+           'fecha_nac' => $request->fechaNacimiento,
+            'apellido' => $request->apellido,
             'genero' => $request->genero,
-            'telefonoFijo' => $request->telefonoFijo,
             'celular' => $request->celular,
-            'docIdentidad' => $request->docIdentidad,
-            'correoElectronico' => $request->correoElectronico,
-            'idCargo' => $request->idCargo,
-            'idTurno' => $request->idTurno,
-            'comision' => $request->comision]);
+            'docIdentidad' => $request->docIdentidad]);
         return response()->json(["actualizado" => $request->all()]);
     }
 

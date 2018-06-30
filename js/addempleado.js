@@ -42,7 +42,7 @@ function Cargar() {
             tabladatos.append("<tr>" +
                     "<td>" + value.nombre + "</td>" +
                     "<td>" + value.genero + "</td>" +
-                    "<td>" + value.docIdentidad + "</td>" +
+                    "<td>" + value.docidentidad + "</td>" +
                     "<td>" +
                     "<button value=" + value.id + " OnClick='openmodal(this);' class='waves-effect waves-light btn btn-floating'  href='#'>" +
                     "<i class='material-icons'>mode_edit</i>" +
@@ -154,15 +154,10 @@ $("#guardar").click(function () {
     var route = "Empleado";
     var token = $("#token").val();
     var nombre = $('#nombre').val();
+    var apellido = $('#apellido').val();
     var fechaNacimiento = $('#fechanacimiento').val();
     var docIdentidad = $('#Docidentidad').val();
-    var telefonoFijo = $('#telefonofijo').val();
-    var celular = $('#celular').val();
-    var correoElectronico = $('#correo').val();
-    var descuento = $("#descuento").val();
     var genero = $('#genero').val();
-    var idCargo = $('#Cargo').val();
-    var idTurno = $('#turno').val();
     $('input#nombre,input#Docidentidad,input#celular,input#correo').characterCounter();
     if (!nombre || !nombre.trim().length) {
         Materialize.toast('NOMBRE VACIO', 1000, 'rounded');
@@ -176,27 +171,6 @@ $("#guardar").click(function () {
         Materialize.toast('DOCUMENTO DE IDENTIDAD VACIO', 1000, 'rounded');
         return;
     }
-
-    if (!celular || !celular.trim().length) {
-        Materialize.toast('CELULAR VACIO', 1000, 'rounded');
-        return;
-    }
-    if (!correoElectronico || !correoElectronico.trim().length) {
-        Materialize.toast('CORREO ELECTRONICO VACIO', 1000, 'rounded');
-        return;
-    }
-    if (!valEmail(correoElectronico)) {
-        Materialize.toast('Inserte una direccion de correo correcta', 2000, 'rounded');
-        return false;
-    }
-    if (!idCargo || !idCargo.trim().length || idCargo == "0") {
-        Materialize.toast('CARGO VACIO', 1000, 'rounded');
-        return;
-    }
-    if (!idTurno || !idTurno.trim().length || idTurno == "0") {
-        Materialize.toast('TURNO VACIO', 1000, 'rounded');
-        return;
-    }
     $.ajax({
         url: route,
         headers: {'X-CSRF-TOKEN': token},
@@ -204,15 +178,10 @@ $("#guardar").click(function () {
         dataType: 'json',
         data: {
             nombre: nombre,
+            apellido: apellido,
             fechaNacimiento: fechaNacimiento,
             genero: genero,
-            telefonoFijo: telefonoFijo,
-            celular: celular,
-            docIdentidad: docIdentidad,
-            correoElectronico: correoElectronico,
-            idCargo: idCargo,
-            idTurno: idTurno,
-            comision: descuento
+            docIdentidad: docIdentidad
         },
         success: function () {
             var route = "Empleados";
@@ -237,15 +206,11 @@ $("#actualizar").click(function () {
     if ($("#perfilpuedeModificar").val() == 1) {
         var value = $("#id").val();
         var nombre = $("#nombre").val();
+       var apellido = $('#apellido').val();
+
         var fechaNacimiento = $('#fechanacimiento').val();
         var docIdentidad = $('#Docidentidad').val();
-        var telefonoFijo = $('#telefonofijo').val();
-        var celular = $('#celular').val();
-        var correoElectronico = $('#correo').val();
-        var descuento = $("#descuento").val();
         var genero = $('#genero').val();
-        var idCargo = $('#Cargo').val();
-        var idTurno = $('#turno').val();
         if (!nombre || !nombre.trim().length) {
             Materialize.toast('NOMBRE VACIO', 1000, 'rounded');
             return;
@@ -258,28 +223,8 @@ $("#actualizar").click(function () {
             Materialize.toast('DOCUMENTO DE IDENTIDAD VACIO', 1000, 'rounded');
             return;
         }
-
-        if (!celular || !celular.trim().length) {
-            Materialize.toast('CELULAR VACIO', 1000, 'rounded');
-            return;
-        }
-        if (!correoElectronico || !correoElectronico.trim().length) {
-            Materialize.toast('CORREO ELECTRONICO VACIO', 1000, 'rounded');
-            return;
-        }
-        if (!valEmail(correoElectronico)) {
-            Materialize.toast('Inserte una direccion de correo correcta', 2000, 'rounded');
-            return false;
-        }
-        if (!idCargo || !idCargo.trim().length || idCargo == "0") {
-            Materialize.toast('CARGO VACIO', 1000, 'rounded');
-            return;
-        }
-        if (!idTurno || !idTurno.trim().length || idTurno == "0") {
-            Materialize.toast('TURNO VACIO', 1000, 'rounded');
-            return;
-        }
-        var route = "/Empleado/" + value + "";
+      
+        var route = "Empleado/" + value + "";
         var token = $("#token").val();
         $.ajax({
             url: route,
