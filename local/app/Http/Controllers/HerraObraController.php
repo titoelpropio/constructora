@@ -54,14 +54,19 @@ function index(){
       return response()->json($result);
   }
 
-function listarHerraObra()
+function listarHerraObra($id)
 {
-  $result=DB::select('select herra_obra.id, herramienta.nombre as herramienta, obra.nombre as obra, herra_obra.precio, herra_obra.cantidad from herra_obra,herramienta,obra where herra_obra.id_obra=obra.id and herramienta.id=herra_obra.id_herramienta and   herra_obra.deleted_at IS NULL');
+  $result=DB::select('select herra_obra.id, herramienta.nombre as herramienta, obra.nombre as obra, herra_obra.precio, herra_obra.cantidad from herra_obra,herramienta,obra where herra_obra.id_obra=obra.id and herramienta.id=herra_obra.id_herramienta and   herra_obra.deleted_at IS NULL and obra.id='.$id);
   return response()->json($result);
 }
   public function destroy($id){
       $HerraObra=HerraObra::find($id);
       $HerraObra->delete();
       return response()->json(["mensaje" => "Eliminado Correctamente"]);
+  }
+  public function show($id){
+      $herramienta = DB::select('select *from herramienta where deleted_at IS NULL');      
+        $obra = DB::select('select *from obra where deleted_at IS NULL and id='.$id);      
+           return view('HerraObra.HerraObra',compact('herramienta','obra'));
   }
 }

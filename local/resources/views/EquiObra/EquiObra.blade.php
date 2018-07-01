@@ -17,6 +17,8 @@
 @section('Contenido')
 @include('Modal.modalEquiObra')
 <div class="container">
+       <?php $idObra=$obra[0]->id; ?>
+    <input type="hidden" id="idObra" value="<?php echo $idObra ?>" name="">
     <h3><strong>Listado de Equipo Obra</strong></h3>
     <!-- Modal Trigger -->
     <div class="row" style="padding-bottom: 20px;">

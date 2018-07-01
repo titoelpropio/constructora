@@ -14,11 +14,12 @@
 //Herramienta Obra
 
 Route::resource('HerraObra','HerraObraController');
-Route::get('listarHerraObra','HerraObraController@listarHerraObra');
+Route::get('listarHerraObra/{id}','HerraObraController@listarHerraObra');
 //Equipo Obra
 
 Route::resource('EquiObra','EquiObraController');
-Route::get('listarEquiObra','EquiObraController@listarEquiObra');
+Route::get('listarEquiObra/{id}','EquiObraController@listarEquiObra');
+
 //Herramienta
 
 Route::resource('Herramienta','HerramientaController');
@@ -35,7 +36,7 @@ Route::get('listarEquipo','EquipoController@listarEquipo');
 
 //Material Obra
 Route::resource('MaterialObra','MaterialObraController');
-Route::get('listarMaterialObra','MaterialObraController@listarMaterialObra');
+Route::get('listarMaterialObra/{id}','MaterialObraController@listarMaterialObra');
 //Equipo
 
 Route::resource('Material','MaterialController');
@@ -122,7 +123,8 @@ Route::resource('Cliente', 'ClienteController');
     Route::get('Gestionarcliente', 'FrontController@GestionarTipoCliente');
 //perfil
 Route::resource('Perfil', 'PerfilController');
-
+//bitagora
+Route::get('Bitacora', 'BitacoraController@store');
 // Route::get('vender_lote/{opcion}','VentaController@vender_lote');
 //empleado
  Route::get('Gestionarempresa', 'FrontController@Gestionarempresa');

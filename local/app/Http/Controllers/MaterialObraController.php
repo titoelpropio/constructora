@@ -54,14 +54,19 @@ function index(){
       return response()->json($result);
   }
 
-function listarMaterialObra()
+function listarMaterialObra($id)
 {
-  $result=DB::select('select mat_obra.id, material.nombre as material, obra.nombre as obra, mat_obra.precio, mat_obra.cantidad from mat_obra,material,obra where mat_obra.id_obra=obra.id and material.id=mat_obra.id_material and   mat_obra.deleted_at IS NULL');
+  $result=DB::select('select mat_obra.id, material.nombre as material, obra.nombre as obra, mat_obra.precio, mat_obra.cantidad from mat_obra,material,obra where mat_obra.id_obra=obra.id and material.id=mat_obra.id_material and   mat_obra.deleted_at IS NULL and obra.id='.$id);
   return response()->json($result);
 }
   public function destroy($id){
       $MaterialObra=MaterialObra::find($id);
       $MaterialObra->delete();
       return response()->json(["mensaje" => "Eliminado Correctamente"]);
+  }
+  public function show($id){
+      $material = DB::select('select *from material where deleted_at IS NULL');      
+  $obra = DB::select('select *from obra where id='.$id);      
+   return view('MaterialObra.MaterialObra',compact('material','obra'));
   }
 }

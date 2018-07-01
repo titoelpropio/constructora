@@ -40,6 +40,7 @@ function Cargar() {
             {data: 'presupuesto'},
             {data: 'Editar', 'class': 'dt-body-center'},
             {data: 'Eliminar', 'class': 'dt-body-center'},
+            {data: 'Mano Obra', 'class': 'dt-body-center'},
         ],
         "columnDefs": [
             {
@@ -57,7 +58,39 @@ function Cargar() {
                 render: function (data, type, row) {
                     return "<button class='btn btn-danger btn-floating' value=" + row.id + " OnClick='Eliminar(this);' title='Eliminar'><i class='material-icons'>delete</i></button>"
                 }
-            }            
+            } ,
+            {
+                targets: 7,
+                searchable: false,
+                orderable: false,
+                render: function (data, type, row) {
+                    return "<a class='btn btn-danger btn-floating' value=" + row.id + ";' href='MaterialObra/"+row.id+"' title='Materiales en obra'><i class='material-icons'>account_balance</i></a>"
+                }
+            },  
+            {
+                targets: 8,
+                searchable: false,
+                orderable: false,
+                render: function (data, type, row) {
+                    return "<a class='btn btn-danger btn-floating' value=" + row.id + ";' href='EquiObra/"+row.id+"' title='Equipos en obra'><i class='material-icons'>build</i></a>"
+                }
+            } ,
+             {
+                targets: 9,
+                searchable: false,
+                orderable: false,
+                render: function (data, type, row) {
+                    return "<a class='btn btn-danger btn-floating' value=" + row.id + ";' href='MaterialObra/"+row.id+"' title='Materiales en obra'><i class='material-icons'>account_balance</i></a>"
+                }
+            },
+             {
+                targets: 10,
+                searchable: false,
+                orderable: false,
+                render: function (data, type, row) {
+                    return "<a class='btn btn-danger btn-floating' value=" + row.id + ";' href='HerraObra/"+row.id+"' title='Materiales en obra'><i class='material-icons'>account_balance</i></a>"
+                }
+            }          
         ],
         "order": [[ 0, "asc" ]],
     });

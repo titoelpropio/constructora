@@ -21,6 +21,8 @@
     <!-- Modal Trigger -->
     <div class="row" style="padding-bottom: 20px;">
         <div class="col s12">
+                   <?php $idObra=$obra[0]->id; ?>
+    <input type="hidden" id="idObra" value="<?php echo $idObra ?>" name="">
             <button class="waves-effect waves-light btn modal-trigger" data-target="modal1">NUEVO MaterialObra</button>
         </div>
     </div>

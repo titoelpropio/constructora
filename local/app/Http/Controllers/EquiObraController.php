@@ -12,9 +12,7 @@ class EquiObraController extends Controller
 { 
  
 function index(){
-	$equipo = DB::select('select *from equipo where deleted_at IS NULL');      
-	$obra = DB::select('select *from obra where deleted_at IS NULL');      
-     return view('EquiObra.EquiObra',compact('equipo','obra'));
+	
 	}
   
 	public function create(){
@@ -54,14 +52,19 @@ function index(){
       return response()->json($result);
   }
 
-function listarEquiObra()
+function listarEquiObra($id)
 {
-  $result=DB::select('select equi_obra.id, equipo.nombre as equipo, obra.nombre as obra, equi_obra.precio, equi_obra.cantidad from equi_obra,equipo,obra where equi_obra.id_obra=obra.id and equipo.id=equi_obra.id_equipo and   equi_obra.deleted_at IS NULL');
+  $result=DB::select('select equi_obra.id, equipo.nombre as equipo, obra.nombre as obra, equi_obra.precio, equi_obra.cantidad from equi_obra,equipo,obra where equi_obra.id_obra=obra.id and equipo.id=equi_obra.id_equipo and   equi_obra.deleted_at IS NULL and obra.id='.$id);
   return response()->json($result);
 }
   public function destroy($id){
       $EquiObra=EquiObra::find($id);
       $EquiObra->delete();
       return response()->json(["mensaje" => "Eliminado Correctamente"]);
+  }
+  public function show($id){
+$equipo = DB::select('select *from equipo where deleted_at IS NULL');      
+  $obra = DB::select('select *from obra where deleted_at IS NULL and id='.$id);      
+     return view('EquiObra.EquiObra',compact('equipo','obra'));
   }
 }

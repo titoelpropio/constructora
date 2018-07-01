@@ -7,7 +7,7 @@ $(document).ready(function () {
         var route = "../";
         window.location.href = route;
     } else {
-        var route = "Autorizaciones"// + idd;
+        var route = $('#autorizacion').val();// + idd;
        Cargarpermiso(route);
       // cargarvistademenu(route);
     }
@@ -31,23 +31,30 @@ function Cargarpermiso(route) {
         success: function (result) {
             $.each(result, function (i, value) {
 
-
+                console.info(value.urlobjeto);
                 if (URLactual == "/contructora/"+value.urlobjeto) {
-                      $("#perfilpuedeGuardar").val("1");
-                    $("#perfilpuedeEliminar").val("1");
-                    $("#perfilpuedeModificar").val("1");
-                    $("#perfilpuedeListars").val("1");
-                    $("#perfilpuedeVerReporte").val("1");
-                    $("#perfilpuedeImprimir").val("1");
-                    // $("#perfilpuedeGuardar").val(value.puedeGuardar);
-                    // $("#perfilpuedeEliminar").val(value.puedeEliminar);
-                    // $("#perfilpuedeModificar").val(value.puedeModificar);
-                    // $("#perfilpuedeListars").val(value.puedeListar);
-                    // $("#perfilpuedeVerReporte").val(value.puedeVerReporte);
-                    // $("#perfilpuedeImprimir").val(value.puedeImprimir);
+                    //   $("#perfilpuedeGuardar").val("1");
+                    // $("#perfilpuedeEliminar").val("1");
+                    // $("#perfilpuedeModificar").val("1");
+                    // $("#perfilpuedeListars").val("1");
+                    // $("#perfilpuedeVerReporte").val("1");
+                    // $("#perfilpuedeImprimir").val("1");
+                    $("#perfilpuedeGuardar").val(value.puedeguardar);
+                    $("#perfilpuedeEliminar").val(value.puedeeliminar);
+                    $("#perfilpuedeModificar").val(value.puedemodificar);
+                    $("#perfilpuedeListars").val(value.puedelistar);
+                    $("#perfilpuedeVerReporte").val(value.puedeverreporte);
+                    contadorFrm(value.idobjeto);
                 }
             });
         }
+    });
+}
+function contadorFrm(idObjeto){
+
+    $.get('Bitacora',{idObjeto:idObjeto},function(res){
+
+        $('#quantityvisit').text(res);
     });
 }
 

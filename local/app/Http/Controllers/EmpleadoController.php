@@ -75,13 +75,12 @@ class EmpleadoController extends Controller {
      */
     public function update(Request $request, $id) {
         $actua = DB::table('empleado')
-                ->where('id', $id)
-                ->update(['nombre' => $request->nombre,
-           'fecha_nac' => $request->fechaNacimiento,
-            'apellido' => $request->apellido,
-            'genero' => $request->genero,
-            'celular' => $request->celular,
-            'docIdentidad' => $request->docIdentidad]);
+        ->where('id', $id)
+        ->update(['nombre' => $request->nombre,
+         'fecha_nac' => $request->fechaNacimiento,
+         'apellido' => $request->apellido,
+         'genero' => $request->genero,
+         'docidentidad' => $request->docIdentidad]);
         return response()->json(["actualizado" => $request->all()]);
     }
 
@@ -96,24 +95,16 @@ class EmpleadoController extends Controller {
         $unsuario = DB::table('usuario')->where('idEmpleado', $id)->update(['eliminado' => 1]);
         return response()->json(["mensaje" => "listo"]);
     }
-
     public function listarempleados() {
         $otro = DB::table('empleado')->select( 'empleado.nombre', 'empleado.genero', 'empleado.docidentidad',  'empleado.id')
-                ->where('empleado.eliminado', 0)
-                ->get('nombre', 'genero', 'docIdentidad', 'id');
+        ->where('empleado.eliminado', 0)
+        ->get('nombre', 'genero', 'docIdentidad', 'id');
         return response()->json($otro);
     }
-
-//    public function listarempleadosresporte() {
-//        $otro = $results = DB::select("SELECT id,nombre from empleado WHERE empleado.eliminado=0 and empleado.nombre<> 'admin'
-// ");
-//        return response()->json($otro);
-//    }
-
     public function listarempleadosresporte() {
         $otro = $results = DB::select("SELECT id,nombre from empleado,usuario WHERE empleado.eliminado=0
             AND empleado.id = usuario.idEmpleado
- ");
+            ");
         return response()->json($otro);
     }
 

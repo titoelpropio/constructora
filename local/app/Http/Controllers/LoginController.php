@@ -36,7 +36,7 @@ class LoginController extends Controller {
 
         $email= strtolower($request['email']);
         $password= strtolower($request['password']);
-        $users=DB::select("select empleado.nombre,empleado.apellido,empleado.id as idEmpleado, perfil.id as idperfil, perfil.nombre as nombreperfil from empleado,users,perfil where  empleado.id=users.idempleado and users.idperfil=perfil.id and empleado.deleted_at IS NULL and users.email='$email'");
+        $users=DB::select("select empleado.nombre,empleado.apellido,empleado.id as idEmpleado, perfil.id as idperfil, perfil.nombre as nombreperfil,users.id as idusuario from empleado,users,perfil where  empleado.id=users.idempleado and users.idperfil=perfil.id and empleado.deleted_at IS NULL and users.email='$email'");
 
 //         $users = DB::table('users')
 //  ->select('empleado.nombre','empleado.apellido','empleado.id as idEmpleado','perfil.id as idPerfil','perfil.nombre as nombreperfil')
@@ -47,6 +47,7 @@ class LoginController extends Controller {
         foreach ($users as $user) {
           $nombre=$user->nombre;
           $idempleado=$user->idempleado;
+          $idusuario=$user->idusuario;
           $idPerfil=$user->idperfil;
           $nombreperfil=$user->nombreperfil;
           $apellido=$user->apellido;
@@ -59,6 +60,7 @@ class LoginController extends Controller {
         }
         else{
 
+        Session::put('idusuario', $idusuario);   
         Session::put('user', $users);   
 
         Session::put('nombre', $nombre);
@@ -93,6 +95,7 @@ class LoginController extends Controller {
     }
 
     public function logout() {
+         Session::put('idPerfil', null);
           Session::put('user', null);  
         return Redirect::to('/');
     }

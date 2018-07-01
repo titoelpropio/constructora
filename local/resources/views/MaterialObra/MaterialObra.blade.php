@@ -16,19 +16,20 @@
 @endsection
 @section('Contenido')
 @include('Modal.modalMaterialObra')
+    <?php $idObra=$obra[0]->id; ?>
+    <input type="hidden" id="idObra" value="<?php echo $idObra ?>" name="">
 <div class="container">
-    <h3><strong>Listado de Material Obra</strong></h3>
+    <h3><strong>Listado de Material Obra <?php echo $obra[0]->nombre; ?></strong></h3>
     <!-- Modal Trigger -->
     <div class="row" style="padding-bottom: 20px;">
         <div class="col s12">
-            <button class="waves-effect waves-light btn modal-trigger" data-target="modal1">NUEVO MaterialObra</button>
+            <button class="waves-effect waves-light btn modal-trigger" data-target="modal1">NUEVO Material Obra</button>
         </div>
     </div>
 
     <table id="lista_MaterialObra" class="display compact nowrapcentered" cellspacing="0" width="100%">
         <thead>
         <th>id</th>
-        <th>Obra</th>
         <th>Material</th>
         <th>Cantidad</th>
         <th>Precio</th>

@@ -18,7 +18,8 @@ function openmodal(btn) {
 
 function Cargar() {
     var tabladatos = $('#datos');
-    var route = "listarEquiObra";
+    idObra=$('#idObra').val();
+    var route = "../listarEquiObra/"+idObra;
      $('#lista_EquiObra').DataTable({
         'paging': true,
         'info': true,
@@ -64,19 +65,20 @@ function Cargar() {
 }
 
 function Mostrar(btn) {
-    var route = "EquiObra/" + btn.value + "/edit";
+    var route = "../EquiObra/" + btn.value + "/edit";
     $.get(route, function (res) {
         $("#obras").val(res[0].id_obra);
         $("#idactualizar").val(res[0].id);
+
         $("#equipos").val(res[0].id_equipo);
+         $('#equipos').material_select();
         $("#cantidads").val(res[0].cantidad);
         $("#precios").val(res[0].precio);
     });
 }
 
 function Eliminar(btn) {
-    if ($("#perfilpuedeEliminar").val() == 1) {
-        var route = "EquiObra/" + btn.value + "";
+        var route = "../EquiObra/" + btn.value + "";
         var token = $("#token").val();
         swal({title: "ESTA SEGURO QUE DESEA ELIMINAR EL EquiObra?",
             type: "warning",
@@ -111,17 +113,11 @@ function Eliminar(btn) {
                             timer: 1000});
                     }
                 });
-    } else {
-        swal({title: "NO TIENE PERMISO PARA ELIMINAR",
-            type: "warning",
-            showConfirmButton: false,
-            closeOnConfirm: false,
-            timer: 1000});
-    }
+
 }
 
 $("#actualizar").click(function () {
-    if ($("#perfilpuedeModificar").val() == 1) {
+    // if ($("#perfilpuedeModificar").val() == 1) {
        
         var value = $("#idactualizar").val();
         var obra = $("#obras").val();
@@ -129,7 +125,7 @@ $("#actualizar").click(function () {
         var equipo = $("#equipos").val();
         var precio = $("#precios").val();
        
-        var route = "EquiObra/" + value + "";
+        var route = "../EquiObra/" + value + "";
         var token = $("#token").val();
         $.ajax({
             url: route,
@@ -160,23 +156,16 @@ $("#actualizar").click(function () {
                     timer: 1000});
             }
         });
-    } else {
-        swal({title: "NO TIENE PERMISO PARA ACTUALIZAR",
-            type: "warning",
-            showConfirmButton: false,
-            closeOnConfirm: false,
-            timer: 1000});
-    }
+   
 });
 
 $("#guardar").click(function () {
-    if ($("#perfilpuedeGuardar").val() == 1) {
         var obra = $("#obra").val();
         var cantidad = $("#cantidad").val();
         var equipo = $("#equipo").val();
         var precio = $("#precio").val();
         
-        var route = "EquiObra";
+        var route = "../EquiObra";
         var token = $("#token").val();
         $.ajax({
             url: route,
@@ -205,11 +194,5 @@ $("#guardar").click(function () {
                     timer: 1000});
             }
         });
-    } else {
-        swal({title: "NO TIENE PERMISO PARA GUARDAR",
-            type: "warning",
-            showConfirmButton: false,
-            closeOnConfirm: false,
-            timer: 1000});
-    }
+   
 });

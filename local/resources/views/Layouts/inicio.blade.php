@@ -49,6 +49,7 @@
     {{--<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />--}}
   </head>
   <body class="layout-semi-dark">
+    <input type="hidden" id="autorizacion" value="{!!URL::to('Autorizaciones')!!}" name="">
     <input type="hidden" id="iddelperfil" value="<?php  echo Session::get('idPerfil');  ?>">
     <input type="hidden" id="perfilpuedeGuardar">
     <input type="hidden"  id="perfilpuedeEliminar">
@@ -179,8 +180,8 @@
                                           <i class="material-icons">lock_outline</i> Lock</a>
                                         </li>
                                         <li>
-                                          <a href="#" class="grey-text text-darken-1">
-                                            <i class="material-icons">keyboard_tab</i> Logout</a>
+                                          <a href="{!!URL::to('Logout')!!}" class="grey-text text-darken-1">
+                                            <i class="material-icons" >keyboard_tab</i> Logout</a>
                                           </li>
                                         </ul>
                                       </div>
@@ -238,7 +239,7 @@
                                                            <?php else: ?>
                                                             <li>
 
-                                                              <a href="{{$value2->urlobjeto}}">
+                                                              <a href="{!!URL::to($value2->urlobjeto)!!}">
                                                                &nbsp;&nbsp;  {{$value2->nombre}}
                                                              </a>
                                                            </li>                                    
@@ -282,14 +283,15 @@
                                   <!-- END MAIN -->
                                   <!-- //////////////////////////////////////////////////////////////////////////// -->
                                   <!-- START FOOTER -->
-                                  <footer class="page-footer">
+                                  <footer class="page-footer footer-fixed gradient-45deg-purple-deep-oranger">
                                     <div class="footer-copyright">
                                       <div class="container">
                                         <span>Copyright ©
                                           <script type="text/javascript">
                                             document.write(new Date().getFullYear());
-                                          </script> <a class="grey-text text-darken-2" href="http://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank">VENCO-SOFT</a> All rights reserved.</span>
-                                          <span class="right hide-on-small-only"> Design and Developed by <a class="grey-text text-darken-2" href="https://pixinvent.com/">VENCO-SOFT</a></span>
+                                          </script> <a class="grey-text text-darken-2" href="http://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank">CONTRUCTORA-BR</a> Todos los derechos reservados.</span>
+                                          <span class="right hide-on-small-only"> Design and Developed by <a class="grey-text text-darken-2" href="https://pixinvent.com/">CONTRUCTORA-BR</a></span>
+                                           <span style="    font-weight: bold;">CATIDAD VISITAS: <span id="quantityvisit">0</span></span>
                                         </div>
                                       </div>
                                     </footer>
@@ -336,10 +338,11 @@
     {!!Html::script('js/plugins/floatThead/jquery.floatThead-slim.min.js')!!}
     {!! Html::script('js/comun.js') !!}
     {!!Html::script('css/select2/select2.min.js')!!}
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize-autocomplete/1.0.7/jquery.materialize-autocomplete.min.js"></script>
     {{--<script src="https://cdnjs.cloudflare.co
     m/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>--}}
-
     @stack('scripts_add')
     @section('scripts')
     @show
@@ -382,6 +385,7 @@
       $(this).select();
     });
   </script>
+   
   <!-- <script type="text/javascript" src="../../js/scripts/dashboard-ecommerce.js"></script> -->
 </body>
 </html>

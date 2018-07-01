@@ -85,22 +85,10 @@ function Mostrar(btn) {
     $.get(route, function (res) {
         $("#id").val(res.id);
         $("#nombre").val(res.nombre);
-        $('#fechanacimiento').val(res.fechaNacimiento);
-        $('#Docidentidad').val(res.docIdentidad);
-        $('#telefonofijo').val(res.telefonoFijo);
-        $('#celular').val(res.celular);
-        $('#correo').val(res.correoElectronico);
+        $('#fechanacimiento').val(res.fecha_nac);
+        $('#Docidentidad').val(res.docidentidad);
         $('#genero').val(res.genero);
-        $('#Cargo').val(res.idCargo);
-        $('#Cargo').material_select();
-        $('#turno').val(res.idTurno);
-        $('#turno').material_select();
-        var slider = $("#descuento").data("ionRangeSlider");
-        slider.update({
-            min: 0,
-            max: 100,
-            from: res.comision
-        });
+        $('#genero').material_select();
     });
 }
 
@@ -235,13 +223,8 @@ $("#actualizar").click(function () {
                 nombre: nombre,
                 fechaNacimiento: fechaNacimiento,
                 genero: genero,
-                telefonoFijo: telefonoFijo,
-                celular: celular,
-                docIdentidad: docIdentidad,
-                correoElectronico: correoElectronico,
-                idCargo: idCargo,
-                idTurno: idTurno,
-                comision: descuento
+                apellido:apellido,
+                docIdentidad: docIdentidad
             },
             success: function () {
                 $('#tablacategoria').DataTable().destroy();

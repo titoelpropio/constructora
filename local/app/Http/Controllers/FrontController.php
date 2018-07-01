@@ -923,7 +923,7 @@ WHERE ingreso.id=ingreso_caja.ingreso_id AND ingreso.idTipoIngreso=tipoingreso.i
     public function Autorizaciones()//$id)
     {
       
-        $productos = DB::table('perfil')->select('perfilobjeto.puedeguardar', 'perfilobjeto.puedemodificar', 'perfilobjeto.puedeeliminar', 'perfilobjeto.puedelistar', 'perfilobjeto.puedeverreporte',  'objeto.urlobjeto')
+        $productos = DB::table('perfil')->select('perfilobjeto.puedeguardar', 'perfilobjeto.puedemodificar', 'perfilobjeto.puedeeliminar', 'perfilobjeto.puedelistar', 'perfilobjeto.puedeverreporte',  'objeto.urlobjeto','perfilobjeto.idobjeto')
             ->join('perfilobjeto', 'perfilobjeto.idperfil', '=', 'perfil.id')
             ->join('objeto', 'objeto.id', '=', 'perfilobjeto.idobjeto')
             ->join('modulo', 'modulo.id', '=', 'objeto.idmodulo')

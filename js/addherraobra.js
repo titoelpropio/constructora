@@ -18,7 +18,8 @@ function openmodal(btn) {
 
 function Cargar() {
     var tabladatos = $('#datos');
-    var route = "listarHerraObra";
+    idObra=$('#idObra').val();
+    var route = "../listarHerraObra/"+idObra;
     $('#lista_MaterialObra').DataTable({
         'paging': true,
         'info': true,
@@ -64,11 +65,13 @@ function Cargar() {
 }
 
 function Mostrar(btn) {
-    var route = "HerraObra/" + btn.value + "/edit";
+    var route = "../HerraObra/" + btn.value + "/edit";
     $.get(route, function (res) {
         $("#obras").val(res[0].id_obra);
         $("#idactualizar").val(res[0].id);
         $("#herramientas").val(res[0].id_herramienta);
+         $('#herramientas').material_select();
+        
         $("#cantidads").val(res[0].cantidad);
         $("#precios").val(res[0].precio);
     });
@@ -76,7 +79,7 @@ function Mostrar(btn) {
 
 function Eliminar(btn) {
     if ($("#perfilpuedeEliminar").val() == 1) {
-        var route = "HerraObra/" + btn.value + "";
+        var route = "../HerraObra/" + btn.value + "";
         var token = $("#token").val();
         swal({title: "ESTA SEGURO QUE DESEA ELIMINAR EL HerraObra?",
             type: "warning",
@@ -121,15 +124,14 @@ function Eliminar(btn) {
 }
 
 $("#actualizar").click(function () {
-    if ($("#perfilpuedeModificar").val() == 1) {
-       
+   
         var value = $("#idactualizar").val();
         var obra = $("#obras").val();
         var cantidad = $("#cantidads").val();
         var herramienta = $("#herramientas").val();
         var precio = $("#precios").val();
        
-        var route = "HerraObra/" + value + "";
+        var route = "../HerraObra/" + value + "";
         var token = $("#token").val();
         $.ajax({
             url: route,
@@ -159,23 +161,18 @@ $("#actualizar").click(function () {
                     timer: 1000});
             }
         });
-    } else {
-        swal({title: "NO TIENE PERMISO PARA ACTUALIZAR",
-            type: "warning",
-            showConfirmButton: false,
-            closeOnConfirm: false,
-            timer: 1000});
-    }
+ 
+  
 });
 
 $("#guardar").click(function () {
-    if ($("#perfilpuedeGuardar").val() == 1) {
+  
         var obra = $("#obra").val();
         var cantidad = $("#cantidad").val();
         var herramienta = $("#herramienta").val();
         var precio = $("#precio").val();
         
-        var route = "HerraObra";
+        var route = "../HerraObra";
         var token = $("#token").val();
         $.ajax({
             url: route,
@@ -193,7 +190,6 @@ $("#guardar").click(function () {
                     showConfirmButton: false,
                     closeOnConfirm: false,
                     timer: 1000});
-                $("#obra").val("");
          $("#cantidad").val("0");
          $("#precio").val("0");
             },
@@ -205,12 +201,6 @@ $("#guardar").click(function () {
                     timer: 1000});
             }
         });
-    } else {
-        swal({title: "NO TIENE PERMISO PARA GUARDAR",
-            type: "warning",
-            showConfirmButton: false,
-            closeOnConfirm: false,
-            timer: 1000});
-    }
+   
 });
 

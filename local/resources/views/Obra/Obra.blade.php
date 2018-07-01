@@ -17,6 +17,7 @@
 @section('Contenido')
 @include('Modal.modalObra')
 <div class="container">
+
     <h3><strong>Listado de Obra</strong></h3>
     <!-- Modal Trigger -->
     <div class="row" style="padding-bottom: 20px;">
@@ -34,6 +35,10 @@
         <th>Presupuesto</th>
         <th>Editar</th>
         <th>Eliminar</th>
+        <th>Materiales</th>
+        <th>Equipos</th>
+        <th>Mano Obra</th>
+        <th>Herramienta</th>
         </thead>
         <tbody id="datos">
         </tbody>
