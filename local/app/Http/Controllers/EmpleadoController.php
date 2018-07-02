@@ -91,14 +91,17 @@ class EmpleadoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        $actua = DB::table('empleado')->where('id', $id)->update(['eliminado' => 1]);
-        $unsuario = DB::table('usuario')->where('idEmpleado', $id)->update(['eliminado' => 1]);
+         $Empleado=Empleado::find($id);
+      $Empleado->delete();
+        // $actua = DB::table('empleado')->where('id', $id)->update(['eliminado' => 1]);
+        // $unsuario = DB::table('usuario')->where('idEmpleado', $id)->update(['eliminado' => 1]);
         return response()->json(["mensaje" => "listo"]);
     }
     public function listarempleados() {
-        $otro = DB::table('empleado')->select( 'empleado.nombre', 'empleado.genero', 'empleado.docidentidad',  'empleado.id')
-        ->where('empleado.eliminado', 0)
-        ->get('nombre', 'genero', 'docIdentidad', 'id');
+        // $otro = DB::table('empleado')->select( 'empleado.nombre', 'empleado.genero', 'empleado.docidentidad',  'empleado.id')
+        // ->where('empleado.eliminado', 0)
+        // ->get('nombre', 'genero', 'docIdentidad', 'id');
+        $otro=DB::select('select*from empleado where deleted_at IS NULL');
         return response()->json($otro);
     }
     public function listarempleadosresporte() {

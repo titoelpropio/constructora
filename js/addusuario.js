@@ -53,11 +53,16 @@ function Cargar() {
         $(res).each(function (key, value) {
             $("#actualizar").show();
             $("#guardar").hide();
-            $("#usuario").val(value.nombreUsuario);
+            $("#usuario").val(value.email);
             $("#password").val(value.password);
             if (typeof value.perfil !== "undefined") {
                 $('#perfil').val(value.perfil);
                 $("#perfil").material_select();
+                                   $("#guardar").hide();
+    $("#actualizar").show();
+            }else{
+                   $("#guardar").show();
+    $("#actualizar").hide();
             }
             $("#fechainicio").val(value.fechainicio);
             $("#fechafin").val(value.fechafin);
@@ -65,8 +70,7 @@ function Cargar() {
             } else {
                 $("#vistaPrevia2").attr("src", value.urlFoto);
             }
-            $("#guardar").show();
-    $("#actualizar").hide();
+            
             // var multi = value.ventamultialmacen;
             // if (typeof value.ventamultialmacen !== "undefined") {
             //     if (multi == "0") {
@@ -153,13 +157,22 @@ $("#guardar").click(function () {
             id: id,
             imagen: imagen,
         },
-        success: function () {
-            swal({title: "USUARIO GUARDADO EXITOSAMENTE",
+        success: function (res) {
+            if (res.mensaje=="error") {
+    swal({title: "EL NOMBRE DE USUARIO YA EXISTE",
+                type: "error",
+                showConfirmButton: false,
+                closeOnConfirm: false,
+                timer: 1000});
+            }
+            else{
+                 swal({title: "USUARIO GUARDADO EXITOSAMENTE",
                 type: "success",
                 showConfirmButton: false,
                 closeOnConfirm: false,
                 timer: 1000});
             window.location.href = "../Empleados";
+            }
         }, error: function () {
             swal({title: "ERROR AL GUARDAR",
                 type: "error",
@@ -192,23 +205,8 @@ $("#actualizar").click(function () {
     var imagen = jQuery('#vistaPrevia2').attr('src');
    
 
-    var route = "/Usuario/" + id + "";
+    var route = "../Usuario/" + id + "";
     var token = $("#token").val();
-    var vent = document.getElementById('test3').checked;
-    var cansell = '';
-    if (vent) {
-        cansell = 0;
-        if ($('#caja_bs_id').val() == '0' && $('#caja_sus_id').val() == '0'){
-            swal('Permiso de Venta','Esta permitiendo que este usuario venda, por lo tanto asignele una caja por defecto','warning');
-            return true;
-        }
-        if ($('#cuenta_bs_id').val() == '0' && $('#cuenta_sus_id').val() == '0'){
-            swal('Permiso de Venta','Esta permitiendo que este usuario venda, por lo tanto asignele una cuenta bancaria por defecto','warning');
-            return true;
-        }
-    } else {
-        cansell = 1;
-    }
     $.ajax({
         url: route,
         headers: {'X-CSRF-TOKEN': token},
@@ -224,12 +222,20 @@ $("#actualizar").click(function () {
             imagen: imagen
      
         },
-        success: function () {
+        success: function (res) {
+             if (res.mensaje=="error") {
+swal({title: "EL NOMBRE DE USUARIO YA EXISTE",
+                type: "error",
+                showConfirmButton: false,
+                closeOnConfirm: false,
+                timer: 1000});
+             }else{
             swal({title: "ACTUALIZACION COMPLETA",
                 type: "success",
                 showConfirmButton: false,
                 closeOnConfirm: false,
                 timer: 1000});
+            }
         }, error: function () {
             swal({title: "ERROR",
                 type: "error",
@@ -251,69 +257,69 @@ jQuery('#seleccionarImagen2').on('change', function (e) {
     };
     Lector.readAsDataURL(oFileInput.files[0]);
 });
-$("#actualizars").click(function () {
-    var password = $("#passwordold").val();
-    var passwordnew = $("#passwordnew").val();
-    var passwordnewrepeat = $("#passwordnewrepeat").val();
-    if (passwordnew.length == 0 || passwordnewrepeat.length == 0 || password.length == 0) {
-        return swal({title: "Advertencia!",
-            text: "Inserte todos los datos",
-            type: "warning",
-            showConfirmButton: false,
-            closeOnConfirm: false,
-            timer: 1000});
-    }
-    if (passwordnew != passwordnewrepeat) {
-        return swal({title: "Advertencia!",
-            text: "Las nuevas contraseñas deben coincidir",
-            type: "warning",
-            showConfirmButton: false,
-            closeOnConfirm: false,
-            timer: 1000});
-    }
-    var id = $("#idempleado").val();
-    var route = "/actualizarpassword";
-    var token = $("#token").val();
-    $.ajax({
-        url: route,
-        headers: {'X-CSRF-TOKEN': token},
-        type: 'POST',
-        dataType: 'json',
-        data: {
-            password: passwordnew,
-            id: id,
-            passwordold: password},
-        success: function (rout) {
-            $(rout).each(function (key, value) {
-                if (value.mensaje == "Contraseña Actualizada") {
-                    $("#passwordold").val("");
-                    $("#passwordnew").val("");
-                    $("#passwordnewrepeat").val("");
-                    swal({title: "Bien!",
-                        text: "Actualizacion Completa",
-                        type: "success",
-                        showConfirmButton: false,
-                        closeOnConfirm: false,
-                        timer: 1000});
-                } else {
-                    swal({title: "Advertencia!",
-                        text: value.mensaje,
-                        type: "warning",
-                        showConfirmButton: false,
-                        closeOnConfirm: false,
-                        timer: 1000});
-                }
-            });
-        }, error: function () {
-            swal({title: "Error :(",
-                text: "No se pudo actulizar su contraseña, intente nuevamente",
-                type: "error",
-                showConfirmButton: false,
-                closeOnConfirm: false,
-                timer: 1000});
-        }
-    });
-});
+// $("#actualizars").click(function () {
+//     var password = $("#passwordold").val();
+//     var passwordnew = $("#passwordnew").val();
+//     var passwordnewrepeat = $("#passwordnewrepeat").val();
+//     if (passwordnew.length == 0 || passwordnewrepeat.length == 0 || password.length == 0) {
+//         return swal({title: "Advertencia!",
+//             text: "Inserte todos los datos",
+//             type: "warning",
+//             showConfirmButton: false,
+//             closeOnConfirm: false,
+//             timer: 1000});
+//     }
+//     if (passwordnew != passwordnewrepeat) {
+//         return swal({title: "Advertencia!",
+//             text: "Las nuevas contraseñas deben coincidir",
+//             type: "warning",
+//             showConfirmButton: false,
+//             closeOnConfirm: false,
+//             timer: 1000});
+//     }
+//     var id = $("#idempleado").val();
+//     var route = "../actualizarpassword";
+//     var token = $("#token").val();
+//     $.ajax({
+//         url: route,
+//         headers: {'X-CSRF-TOKEN': token},
+//         type: 'POST',
+//         dataType: 'json',
+//         data: {
+//             password: passwordnew,
+//             id: id,
+//             passwordold: password},
+//         success: function (rout) {
+//             $(rout).each(function (key, value) {
+//                 if (value.mensaje == "Contraseña Actualizada") {
+//                     $("#passwordold").val("");
+//                     $("#passwordnew").val("");
+//                     $("#passwordnewrepeat").val("");
+//                     swal({title: "Bien!",
+//                         text: "Actualizacion Completa",
+//                         type: "success",
+//                         showConfirmButton: false,
+//                         closeOnConfirm: false,
+//                         timer: 1000});
+//                 } else {
+//                     swal({title: "Advertencia!",
+//                         text: value.mensaje,
+//                         type: "warning",
+//                         showConfirmButton: false,
+//                         closeOnConfirm: false,
+//                         timer: 1000});
+//                 }
+//             });
+//         }, error: function () {
+//             swal({title: "Error :(",
+//                 text: "No se pudo actulizar su contraseña, intente nuevamente",
+//                 type: "error",
+//                 showConfirmButton: false,
+//                 closeOnConfirm: false,
+//                 timer: 1000});
+//         }
+//     });
+// });
 function cargaralmacendesucursal(idpunto) {
     $('#almacen')
             .find('option')

@@ -18,7 +18,7 @@ class User
      */
       protected $table = 'users';
     protected $fillable = [
-        'idEmpleado', 'email', 'password','idPerfil'
+        'idEmpleado', 'email', 'password','idperfil','contra'
     ];
 
     /**

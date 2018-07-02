@@ -40,18 +40,7 @@
     <th>Eliminar</th>
     <th>Usuario</th>
 </thead>
-<tfoot  style=" display: table-header-group; background: white;">
-<th>Nombre</th>
-<th>Genero</th>
-<th>Doc. Identidad</th>
-<th>Cargo</th>
-<th>comision</th>
-<th></th>
-<th></th>
-<th></th>
-</tfoot>
-<tbody id="datos">
-</tbody>
+
 </table>  
 
 @stop

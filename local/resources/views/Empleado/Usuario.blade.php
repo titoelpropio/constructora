@@ -36,7 +36,7 @@
             </div>
             <div class="input-field col s12 m6 l3">
                 <label for="usuario">Usuario:</label>
-                <input id="usuario" type="text" placeholder="">
+                <input id="usuario" type="text" placeholder="" name="email">
             </div>
             <div class="input-field col s12 m6 l3">
                 <label for="password">Contraseña:</label>

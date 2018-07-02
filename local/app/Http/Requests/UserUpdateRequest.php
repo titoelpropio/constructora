@@ -24,10 +24,9 @@ class UserUpdateRequest extends Request
     public function rules()
     {
         return [
-           'name'=>'required',
-            'email'=>'required',
+           'usuario'=>'required',
+            'password'=>'required'
       
-            'id_empresa'=>'required',
         ];
     }
 }

@@ -4,7 +4,7 @@ $(document).ready(function () {
     URLactual = window.location.pathname;
     var idd = $('#iddelperfil').val();
     if (idd == '') {
-        var route = "../";
+        var route = $('#raiz').val();
         window.location.href = route;
     } else {
         var route = $('#autorizacion').val();// + idd;

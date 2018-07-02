@@ -38,28 +38,59 @@ function Cargar() {
     var route = "listarempleados";
     $('#datos').empty();
     $.get(route, function (res) {
-        $(res).each(function (key, value) {
-            tabladatos.append("<tr>" +
-                    "<td>" + value.nombre + "</td>" +
-                    "<td>" + value.genero + "</td>" +
-                    "<td>" + value.docidentidad + "</td>" +
-                    "<td>" +
-                    "<button value=" + value.id + " OnClick='openmodal(this);' class='waves-effect waves-light btn btn-floating'  href='#'>" +
-                    "<i class='material-icons'>mode_edit</i>" +
-                    "</button>" +
-                    "</td><td>" +
-                    "<button class='btn btn-danger btn-floating' value=" + value.id + " OnClick='Eliminar(this);'>" +
-                    "<i class='material-icons'>delete</i>" +
-                    "</button>" +
-                    "</td><td>" +
-                    "<button class='btn btn-danger btn-floating' value=" + value.id + " OnClick='usuario(this);' title='Asignar usuario'>" +
-                    "<i class='material-icons'>assignment_ind</i>" +
-                    "</button>" +
-                    "</td>" +
-                    "</tr>");
-        });
-        paginador();
+     
+          
+             $('#tablacategoria').DataTable({
+        'paging': true,
+        'info': true,
+        'filter': true,
+        'stateSave': true,
+        // 'processing': true,
+        // 'serverSide': true,
+        'ajax': {
+            url: route,
+            type: "get",
+            dataSrc: '',
+            // async: false,
+        },
+        'columns': [
+            {data: 'nombre'},
+            {data: 'genero'},
+            {data: 'docidentidad'},
+            {data: 'Editar', 'class': 'dt-body-center'},
+            {data: 'Eliminar', 'class': 'dt-body-center'},
+            {data: 'Usuario', 'class': 'dt-body-center'},
+        ],
+        "columnDefs": [
+            {
+                targets: 3,
+                searchable: false,
+                orderable: false,
+                render: function (data, type, row) {
+                    return "<button value=" + row.id + " OnClick='openmodal(this);' class='waves-effect waves-light btn btn-floating'  href='#' title='Editar'><i class='material-icons'>mode_edit</i></button>"
+                }
+            },
+            {
+                targets: 4,
+                searchable: false,
+                orderable: false,
+                render: function (data, type, row) {
+                    return "<button class='btn btn-danger btn-floating' value=" + row.id + " OnClick='Eliminar(this);' title='Eliminar'><i class='material-icons'>delete</i></button>"
+                }
+            } ,
+            {
+                targets: 5,
+                searchable: false,
+                orderable: false,
+                render: function (data, type, row) {
+                    return "<button class='btn btn-danger btn-floating' value=" + row.id + " OnClick='usuario(this);' title='Asignar usuario'><i class='material-icons'>assignment_ind</i></button>"
+                }
+            }            
+        ],
+        "order": [[ 0, "asc" ]],
     });
+        });
+       // paginador();
 }
 
 function usuario(btn) {
@@ -227,7 +258,7 @@ $("#actualizar").click(function () {
                 docIdentidad: docIdentidad
             },
             success: function () {
-                $('#tablacategoria').DataTable().destroy();
+               // $('#tablacategoria').DataTable().destroy();
                 Cargar();
                 $("#modal1").modal('close');
                 $('.lean-overlay').remove();

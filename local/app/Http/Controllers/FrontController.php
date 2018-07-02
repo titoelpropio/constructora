@@ -801,7 +801,7 @@ WHERE ingreso.id=ingreso_caja.ingreso_id AND ingreso.idTipoIngreso=tipoingreso.i
 
     public function Gestionarusuario($id_empleado)
     {
-        $empleado = DB::select("select * from empleado where eliminado = 0 and id = ?", [$id_empleado]);
+        $empleado = DB::select("select * from empleado where id = ?", [$id_empleado]);
 
         $caja_seleccionada =
         $perfil = DB::table('perfil')->select('nombre', 'id')->where('eliminado', 0)->get();

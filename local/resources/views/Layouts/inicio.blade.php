@@ -86,13 +86,7 @@
                   <i class="material-icons">settings_overscan</i>
                 </a>
               </li>
-              <li>
-                <a href="javascript:void(0);" class="waves-effect waves-block waves-light notification-button" data-activates="notifications-dropdown">
-                  <i class="material-icons">notifications_none
-                    <small class="notification-badge">5</small>
-                  </i>
-                </a>
-              </li>
+              
               <li>
                 <a href="javascript:void(0);" class="waves-effect waves-block waves-light profile-button" data-activates="profile-dropdown">
                   <span class="avatar-status avatar-online">
@@ -101,11 +95,7 @@
                   </span>
                 </a>
               </li>
-              <li>
-                <a href="#" data-activates="chat-out" class="waves-effect waves-block waves-light chat-collapse">
-                  <i class="material-icons">format_indent_increase</i>
-                </a>
-              </li>
+             
             </ul>
             <!-- translation-button -->
            <!--  <ul id="translation-dropdown" class="dropdown-content">
@@ -162,7 +152,7 @@
                               </ul>
                               <!-- profile-dropdown -->
                               <ul id="profile-dropdown" class="dropdown-content">
-                                <li>
+                                <!-- <li>
                                   <a href="#" class="grey-text text-darken-1">
                                     <i class="material-icons">face</i> Profile</a>
                                   </li>
@@ -178,7 +168,7 @@
                                       <li>
                                         <a href="#" class="grey-text text-darken-1">
                                           <i class="material-icons">lock_outline</i> Lock</a>
-                                        </li>
+                                        </li> -->
                                         <li>
                                           <a href="{!!URL::to('Logout')!!}" class="grey-text text-darken-1">
                                             <i class="material-icons" >keyboard_tab</i> Logout</a>
@@ -207,19 +197,21 @@
                                           </a>
                                         </h1>
                                       </div>
-
+                                      <input type="hidden" name="" id="raiz" value="{!!URL::to('/')!!}">
                                       <ul id="slide-out" class="side-nav fixed leftside-navigation">
                                         <li class="no-padding">
                                           <ul class="collapsible" data-collapsible="accordion">
-                                            <?php 
-                                            if (!session()->has('idPerfil')) {
-                                              return redirect('/');
-                                            }
 
+                                            <?php 
+                                            if (!session()->has('idPerfil')) 
+                                            {
+                                            //  return redirect('/');
+                                            }
+                                            else
+                                            {
                                             $modulo=DB::select("SELECT * FROM modulo order by orden asc "); //OBTENGO LOS MODULOS DISPONIBLES PARA LA EMPRESA?>
                                             <?php foreach ($modulo as $key => $value): ?>
-
-                                              <?php $objeto=DB::select("SELECT objeto.* FROM objeto,perfilobjeto WHERE objeto.id=perfilobjeto.idObjeto AND objeto.estado=0 AND objeto.eliminado=0 AND objeto.idmodulo=".$value->id." AND perfilobjeto.idperfil=".Session::get('idPerfil')." AND perfilobjeto.puedelistar=1 "); //OBTENGO LOS OBJETOS DISPONIBLE DE DADO EL MODULO Y EL PERFIL EN CASO Q NO TENGA PERMISO A NINGUN MODULO VERIFIXO CON EL COUNT SI ES 0 NO GENERA EL MODULO.?>
+                                                <?php $objeto=DB::select("SELECT objeto.* FROM objeto,perfilobjeto WHERE objeto.id=perfilobjeto.idObjeto AND objeto.estado=0 AND objeto.eliminado=0 AND objeto.idmodulo=".$value->id." AND perfilobjeto.idperfil=".Session::get('idPerfil')." AND perfilobjeto.puedelistar=1 "); //OBTENGO LOS OBJETOS DISPONIBLE DE DADO EL MODULO Y EL PERFIL EN CASO Q NO TENGA PERMISO A NINGUN MODULO VERIFIXO CON EL COUNT SI ES 0 NO GENERA EL MODULO.?>
                                               <?php if (count($objeto) > 0): //PREGUNTO SI TIENE ALGUN OBJETO DISPONIBLE EN ESE MODULO PARA Q APARESCA EL MODULO?>
                                                 <li class="bold">
                                                   <a class="collapsible-header  waves-effect waves-cyan">
@@ -243,15 +235,20 @@
                                                                &nbsp;&nbsp;  {{$value2->nombre}}
                                                              </a>
                                                            </li>                                    
-                                                         <?php endif ?>
+                                                         <?php endif ;?>
                                                        </div>                                        
-                                                     <?php endforeach ?>
+                                                     <?php endforeach ;?>
                                                    </ul>
                                                  </div>
                                                </li>               
                                              <?php endif ?>
                                              
-                                           <?php endforeach ?>
+                                            
+                                           <?php endforeach ;
+                                        }
+
+
+                                           ?>
                                           </ul>
                                         </li>
                                       </ul>
