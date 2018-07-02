@@ -32,13 +32,82 @@ var CustomLineChartSampleOneData = {
     data: [24, 18, 20, 30, 40, 43, ]
   }]
 };
+totales=0;
+function listardetalleobra(idobra){
+$.get('listardetalleobra/'+idobra,function(res){
+$('#modal3').modal('open');
+equi_obra=res.equi_obra;
+herra_obra=res.herra_obra;
+mat_obra=res.mat_obra;
+mano_obra=res.mano_obra;
+total=0;
+ totales=0;
+ total1=0;
+total2=0;
+total3=0;
+total4=0;
+for (var i = 0; i < equi_obra.length; i++) {
+    total1=total1+parseFloat(equi_obra[i].subtotal);
+}
+totales+=total1;
 
+for (var i = 0; i < herra_obra.length; i++) {
+    total2=total2+parseFloat(herra_obra[i].subtotal);
+}
+totales+=total2;
+
+for (var i = 0; i < mat_obra.length; i++) {
+    total3=total3+parseFloat(mat_obra[i].subtotal);
+}
+totales+=total3;
+
+for (var i = 0; i < mano_obra.length; i++) {
+    total4=total4+parseFloat(mano_obra[i].subtotal);
+ 
+}
+totales+=total4;
+  recargarchart(total1,total2,total3,total4);
+});
+}
 
 $(window).on('load', function() {   
   window.CustomLineChartSampleOne = new Chart(document.getElementById("custom-line-chart-sample-one").getContext("2d")).Line(CustomLineChartSampleOneData, options2);
-  window.CustomLineChartSampleTwo = new Chart(document.getElementById("custom-line-chart-sample-two").getContext("2d")).Line(CustomLineChartSampleTwoData, options2);
-  window.CustomLineChartSampleThree = new Chart(document.getElementById("custom-line-chart-sample-three").getContext("2d")).Line(CustomLineChartSampleThreeData, options2);
+  // window.CustomLineChartSampleTwo = new Chart(document.getElementById("custom-line-chart-sample-two").getContext("2d")).Line(CustomLineChartSampleTwoData, options2);
+  // window.CustomLineChartSampleThree = new Chart(document.getElementById("custom-line-chart-sample-three").getContext("2d")).Line(CustomLineChartSampleThreeData, options2);
+   recargarchart();
 });
+
+function recargarchart(total1,total2,total3,total4) {
+  var PieDoughnutChartSampleData = [
+    {
+        value: total3,
+        color:"#FF5252",
+        highlight: "#E53935",
+        label: "Material"
+    },
+    {
+        value: total2,
+        color: "#00BFA5",
+        highlight: "#00897b",
+        label: "Herramienta"
+    },
+    {
+        value: total4,
+        color: "#FF6E40",
+        highlight: "#F4511E",
+        label: "ManoObra"
+    },
+    {
+        value: total1,
+        color: "#FF6E40",
+        highlight: "#F4511E",
+        label: "Equipo"
+    }
+]
+     window.PieChartSample = new Chart(document.getElementById("pie-chart-sample").getContext("2d")).Pie(PieDoughnutChartSampleData,{
+   responsive:true
+  });
+}
 // window.onload = function () {
 //     var token = $("#token").val();
 

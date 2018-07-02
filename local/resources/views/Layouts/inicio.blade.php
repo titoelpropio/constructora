@@ -216,14 +216,14 @@
                                               return redirect('/');
                                             }
 
-                                            $modulo=DB::select("SELECT * FROM modulo "); //OBTENGO LOS MODULOS DISPONIBLES PARA LA EMPRESA?>
+                                            $modulo=DB::select("SELECT * FROM modulo order by orden asc "); //OBTENGO LOS MODULOS DISPONIBLES PARA LA EMPRESA?>
                                             <?php foreach ($modulo as $key => $value): ?>
 
                                               <?php $objeto=DB::select("SELECT objeto.* FROM objeto,perfilobjeto WHERE objeto.id=perfilobjeto.idObjeto AND objeto.estado=0 AND objeto.eliminado=0 AND objeto.idmodulo=".$value->id." AND perfilobjeto.idperfil=".Session::get('idPerfil')." AND perfilobjeto.puedelistar=1 "); //OBTENGO LOS OBJETOS DISPONIBLE DE DADO EL MODULO Y EL PERFIL EN CASO Q NO TENGA PERMISO A NINGUN MODULO VERIFIXO CON EL COUNT SI ES 0 NO GENERA EL MODULO.?>
                                               <?php if (count($objeto) > 0): //PREGUNTO SI TIENE ALGUN OBJETO DISPONIBLE EN ESE MODULO PARA Q APARESCA EL MODULO?>
                                                 <li class="bold">
                                                   <a class="collapsible-header  waves-effect waves-cyan">
-                                                    <i class="material-icons"></i> {{$value->nombre}} 
+                                                   <i class="material-icons">{{$value->icono}}</i>{{$value->nombre}} 
                                                   </a>
                                                   <div class="collapsible-body">
                                                     <ul>
@@ -253,12 +253,6 @@
                                              
                                            <?php endforeach ?>
                                           </ul>
-                                        </li>
-                                        <li class="bold">
-                                          <a class="collapsible naranja white-text" style="font-size:11px;">
-                                            <i class="" style="">Bs.</i>TCV:<strong><label id="TCV" class="white-text" style="font-size:15px;"></label></strong>
-                                            TCC:<strong><label id="TCC" class="white-text" style="font-size: 15px;"></label></strong>
-                                          </a>
                                         </li>
                                       </ul>
                                       <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only gradient-45deg-light-blue-cyan gradient-shadow">

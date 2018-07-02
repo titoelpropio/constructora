@@ -82,11 +82,10 @@ class PerfilobjetoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
-        $actua = DB::table('Perfilobjeto')->where('id', $id)->update(['puedeGuardar' => $request->guardar, 'puedeModificar' => $request->modificar, 'puedeEliminar' => $request->eliminar, 'puedeListar' => $request->listar, 'puedeVerReporte' => $request->verreporte, 'puedeImprimir' => $request->Imprimir]);
+        $actua = DB::table('perfilobjeto')->where('id', $id)->update(['puedeguardar' => $request->guardar, 'puedemodificar' => $request->modificar, 'puedeeliminar' => $request->eliminar, 'puedelistar' => $request->listar, 'puedeverreporte' => $request->verreporte]);
         return response()->json(["actualizado" => $request->all()]);
     }
 
-//idperfil: idperfil,idobjeto:idobjeto,guardar:guardar,modificar:modificar,eliminar:eliminar,listar:listar,verreporte:verreporte,Imprimir:Imprimir
     /**
      * Remove the specified resource from storage.
      *

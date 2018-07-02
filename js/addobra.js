@@ -41,6 +41,7 @@ function Cargar() {
             {data: 'Editar', 'class': 'dt-body-center'},
             {data: 'Eliminar', 'class': 'dt-body-center'},
             {data: 'Mano Obra', 'class': 'dt-body-center'},
+            {data: 'Detalle Obra', 'class': 'dt-body-center'},
         ],
         "columnDefs": [
             {
@@ -80,7 +81,7 @@ function Cargar() {
                 searchable: false,
                 orderable: false,
                 render: function (data, type, row) {
-                    return "<a class='btn btn-danger btn-floating' value=" + row.id + ";' href='MaterialObra/"+row.id+"' title='Materiales en obra'><i class='material-icons'>account_balance</i></a>"
+                    return "<a class='btn btn-danger btn-floating' value=" + row.id + ";' href='MdoObra/"+row.id+"' title='Materiales en obra'><i class='material-icons'>account_balance</i></a>"
                 }
             },
              {
@@ -90,7 +91,15 @@ function Cargar() {
                 render: function (data, type, row) {
                     return "<a class='btn btn-danger btn-floating' value=" + row.id + ";' href='HerraObra/"+row.id+"' title='Materiales en obra'><i class='material-icons'>account_balance</i></a>"
                 }
-            }          
+            }, 
+            {
+                targets: 11,
+                searchable: false,
+                orderable: false,
+                render: function (data, type, row) {
+                    return "<button class='btn btn-danger btn-floating' OnClick='listardetalleobra(" + row.id + ")' title='Detalle obra'><i class='material-icons'>assignment</i></button>"
+                }
+            }        
         ],
         "order": [[ 0, "asc" ]],
     });
@@ -284,4 +293,70 @@ function paginador() {
             });
         });
     });
+}
+
+function listardetalleobra(idobra){
+ $('#tbodyEquipo').empty();
+ $('#tbodyHerramienta').empty();
+ $('#tbodyManoObra').empty();
+ $('#tbodyMaterial').empty();
+$.get('listardetalleobra/'+idobra,function(res){
+$('#modal3').modal('open');
+equi_obra=res.equi_obra;
+herra_obra=res.herra_obra;
+mat_obra=res.mat_obra;
+mano_obra=res.mano_obra;
+total=0;
+totales=0;
+for (var i = 0; i < equi_obra.length; i++) {
+    total=total+parseFloat(equi_obra[i].subtotal);
+  $('#tbodyEquipo').append('<tr>'+
+        '<td>'+equi_obra[i].nombre+
+        '<td>'+equi_obra[i].cantidad+
+        '<td>'+equi_obra[i].precio+
+        '<td>'+equi_obra[i].subtotal
+    );
+
+}
+totales+=total;
+$('#tfootEquipo').text(total);
+total=0;
+for (var i = 0; i < herra_obra.length; i++) {
+    total=total+parseFloat(herra_obra[i].subtotal);
+  $('#tbodyHerramienta').append('<tr>'+
+        '<td>'+herra_obra[i].nombre+
+        '<td>'+herra_obra[i].cantidad+
+        '<td>'+herra_obra[i].precio+
+        '<td>'+herra_obra[i].subtotal
+    );
+}
+$('#tfootHerramienta').text(total);
+totales+=total;
+total=0;
+
+for (var i = 0; i < mat_obra.length; i++) {
+    total=total+parseFloat(mat_obra[i].subtotal);
+  $('#tbodyMaterial').append('<tr>'+
+        '<td>'+mat_obra[i].nombre+
+        '<td>'+mat_obra[i].cantidad+
+        '<td>'+mat_obra[i].precio+
+        '<td>'+mat_obra[i].subtotal
+    );
+}
+$('#tfootMaterial').text(total);
+totales+=total;
+total=0;
+for (var i = 0; i < mano_obra.length; i++) {
+    total=total+parseFloat(mano_obra[i].subtotal);
+  $('#tbodyManoObra').append('<tr>'+
+        '<td>'+mano_obra[i].nombre+
+        '<td>'+mano_obra[i].cantidad+
+        '<td>'+mano_obra[i].precio+
+        '<td>'+mano_obra[i].subtotal
+    );
+}
+totales+=total;
+$('#totales').text(totales);
+$('#tfootManoObra').text(total);
+});
 }

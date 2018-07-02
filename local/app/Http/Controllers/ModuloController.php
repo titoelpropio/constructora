@@ -40,7 +40,10 @@ class ModuloController extends Controller
      */
     public function store(Request $request)
     {
-        DB::table('modulo')->insert(['nombre' => $request->nombre]);
+        DB::table('modulo')->insert(['nombre' => $request->nombre,
+            'orden' => $request->orden,
+            'icono' => $request->icono
+        ]);
        
                  
         return response()->json($request->all());
@@ -78,7 +81,7 @@ class ModuloController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $actua= DB::table('modulo')->where('id', $id)->update(['nombre' =>$request->nombre,'icono' => $request->icono,'habilitado' => $request->habilitado,'nro'=>$request->nro]);
+        $actua= DB::table('modulo')->where('id', $id)->update(['nombre' =>$request->nombre,'icono' => $request->icono,'orden'=>$request->nro]);
         return response()->json(["mensaje" => "listo"]);
     }
 
@@ -90,13 +93,13 @@ class ModuloController extends Controller
      */
     public function destroy($id)
     {
-  $actua= DB::table('modulo')->where('id', $id)->update(['eliminado' =>1]);
-        return response()->json(["mensaje" => "listo"]);
+     $actua = DB::table('modulo')->where('id', $id)->delete();
+     return response()->json(["mensaje" => "listo"]);
     }
 
 public function listarmodulo()
     {
-     $otro=DB::table('modulo')->select('nombre','id' )->get();
+     $otro=DB::table('modulo')->select('nombre','id','orden' )->get();
     return response()->json($otro);
      }
 

@@ -24,7 +24,7 @@ class Modulo extends Authenticatable implements AuthenticatableContract,
      */
       protected $table = 'modulo';
     protected $fillable = [
-        'nombre'
+        'nombre','icono','orden'
     ];
 
     /**

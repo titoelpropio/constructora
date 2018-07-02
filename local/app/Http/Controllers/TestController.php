@@ -15,8 +15,8 @@ use Illuminate\Contracts\Encryption\DecryptException;
 class TestController extends Controller {
 
     function index() {
-       
-        return view('index');
+       $obra=DB::Select('select *from obra where deleted_at IS NULL');
+        return view('index',compact('obra'));
     }
 
     public function create() {

@@ -11,6 +11,10 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+//mano de obra obra
+
+Route::resource('MdoObra','MdoObraController');
+Route::get('listarMdoObra/{id}','MdoObraController@listarMdoObra');
 //Herramienta Obra
 
 Route::resource('HerraObra','HerraObraController');
@@ -46,6 +50,7 @@ Route::get('listarMaterial','MaterialController@listarMaterial');
 
 Route::resource('Obra','ObraController');
 Route::get('listarobra','ObraController@listarObra');
+Route::get('listardetalleobra/{id}','ObraController@listardetalleobra');
 
 //cliente
 Route::resource('cliente','ClienteController');

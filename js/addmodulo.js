@@ -17,28 +17,69 @@ function Cargar() {
     var tabladatos = $('#datos');
     var route = "listarmodulo";
     $('#datos').empty();
-    $.get(route, function (res) {
-        $(res).each(function (key, value) {
-            tabladatos.append("<tr>" +
-                    "<td>" + value.nombre + "</td>" +
-                    "<td>" +
-                    "<button value=" + value.id + " OnClick='openmodal(this);' class='waves-effect waves-light btn btn-floating'  href='#' title='Editar'><i class='material-icons'>mode_edit</i></button>" +
-                    "</td><td>" +
-                    "<button class='btn btn-danger btn-floating' value=" + value.id + " OnClick='Eliminar(this);' title='Eliminar'><i class='material-icons'>delete</i></button>" +
-                    "</td>" +
-                    "</tr>");
-        });
-        paginador();
+    // $.get(route, function (res) {
+    //     $(res).each(function (key, value) {
+    //         tabladatos.append("<tr>" +
+    //                 "<td>" + value.nombre + "</td>" +
+    //                 "<td>" +
+    //                 "<button value=" + value.id + " OnClick='openmodal(this);' class='waves-effect waves-light btn btn-floating'  href='#' title='Editar'><i class='material-icons'>mode_edit</i></button>" +
+    //                 "</td><td>" +
+    //                 "<button class='btn btn-danger btn-floating' value=" + value.id + " OnClick='Eliminar(this);' title='Eliminar'><i class='material-icons'>delete</i></button>" +
+    //                 "</td>" +
+    //                 "</tr>");
+    //     });
+    //     paginador();
+    // });
+    $('#tablacategoria').DataTable({
+        'paging': true,
+        'info': true,
+        'filter': true,
+        'stateSave': true,
+        // 'processing': true,
+        // 'serverSide': true,
+        'ajax': {
+            url: route,
+            type: "get",
+            dataSrc: '',
+            // async: false,
+        },
+        'columns': [
+            {data: 'nombre'},
+            {data: 'orden'},
+            {data: 'Editar', 'class': 'dt-body-center'},
+            {data: 'Eliminar', 'class': 'dt-body-center'},
+        ],
+        "columnDefs": [
+            {
+                targets: 2,
+                searchable: false,
+                orderable: false,
+                render: function (data, type, row) {
+                    return "<button value=" + row.id + " OnClick='openmodal(this);' class='waves-effect waves-light btn btn-floating'  href='#' title='Editar'><i class='material-icons'>mode_edit</i></button>"
+                }
+            },
+            {
+                targets: 3,
+                searchable: false,
+                orderable: false,
+                render: function (data, type, row) {
+                    return "<button class='btn btn-danger btn-floating' value=" + row.id + " OnClick='Eliminar(this);' title='Eliminar'><i class='material-icons'>delete</i></button>"
+                }
+            }            
+        ],
+        "order": [[ 0, "asc" ]],
     });
 }
 
 $("#guardar").click(function () {
     if ($("#perfilpuedeGuardar").val() == 1) {
         var nombre = $("#nombre").val();
-        // if (!nombre || !nombre.trim().length) {
-        //     Materialize.toast('Campos vacios', 1000, 'rounded');
-        //     return;
-        // }
+        var icono = $("#icono").val();
+        var nroOrden = $("#nro").val();
+        if (!nombre || !nombre.trim().length) {
+            Materialize.toast('Campos vacios', 1000, 'rounded');
+            return;
+        }
         // if (document.getElementById('test1').checked == true) {
         //     habilitado = 1;//SI
         // } else {
@@ -50,7 +91,7 @@ $("#guardar").click(function () {
             headers: {'X-CSRF-TOKEN': token},
             type: 'POST',
             dataType: 'json',
-            data: {nombre: nombre},
+            data: {nombre: nombre,nroOrden:nroOrden,icono:icono},
             success: function () {
                 $('#tablacategoria').DataTable().destroy();
                 Cargar();
@@ -84,7 +125,7 @@ function Mostrar(btn) {
     $.get(route, function (res) {
         $("#nombreact").val(res.nombre);
         $("#iconoact").val(res.icono);
-        $("#nroact").val(res.nro);
+        $("#nroact").val(res.orden);
 
         if (res.habilitado == 1) {
             document.getElementById('test1act').checked = true;
@@ -157,7 +198,7 @@ $("#actualizar").click(function () {
             habilitado = 0;//NO        
         }
                 
-        var route = "/Modulo/" + value + "";
+        var route = "Modulo/" + value + "";
         var token = $("#token").val();
         $.ajax({
             url: route,

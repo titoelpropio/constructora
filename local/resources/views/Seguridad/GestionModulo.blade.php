@@ -25,16 +25,11 @@
 <table id="tablacategoria" class="centered display compact nowrap" cellspacing="0" width="100%">
     <thead>
     <th>Nombre</th>
+    <th>Orden</th>
     <th>Editar</th>
     <th>Eliminar</th>
 </thead>
-<tfoot style=" display: table-header-group; background: white;">
-<th>Nombre</th>
-<th></th>
-<th></th>
-</tfoot>
-<tbody id="datos">
-</tbody>
+
 </table>
 @stop
 @section('scripts')

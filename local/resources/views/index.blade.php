@@ -14,9 +14,36 @@
             <div class="sample-chart-wrapper" style="margin-bottom: -14px; margin-top: -75px;">
               <canvas id="custom-line-chart-sample-one" class="center"></canvas>
           </div>
+ 
       </div>
+
   </div>
 </div>
+            <div id="chartjs-pie-chart" class="section">
+                <div class="row">
+                  <div class="col s9">
+                    <div class="row">
+                      <div class="col s12 m12 l12">
+                        <div class="sample-chart-wrapper">
+                          <canvas id="pie-chart-sample"></canvas>
+                        </div>
+                        <p class="header center">Pie Charts</p>
+                      </div>
+                    
+                    </div>
+                  </div>
+                  <div class="col s3">
+                    <select id="obra" onchange="listardetalleobra(this.value)">
+                      <option>Seleccione una obra</option>
+                      <?php 
+                        for ($i=0; $i <count($obra) ; $i++) { 
+                          echo "<option value='".$obra[$i]->id."'>".$obra[$i]->nombre;
+                        }
+                       ?>
+                    </select>
+                  </div>
+                </div>
+              </div>
 </div>
 </div>
 <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
