@@ -58,7 +58,7 @@
         <div class="row">
             <div class="input-field col s12 m12 l12">
                 <i class="mdi-communication-phone prefix"></i>
-                {!!Form::label('duracions','Precio Uso: ')!!}
+                {!!Form::label('duracions','Duracion: ')!!}
                 {!!Form::number('duracion',0, ['id'=>'duracions'])!!}
             </div>
             <div class="input-field col s12 m12 l12">

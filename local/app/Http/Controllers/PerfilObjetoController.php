@@ -93,16 +93,14 @@ class PerfilobjetoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        $actua = DB::table('perfilobjeto')->where('id', $id)->delete();
-
+        // $actua = DB::table('perfilobjeto')->where('id', $id)->delete();
+         $Cargo=Perfilobjeto::find($id);
+      $Cargo->delete();
         return response()->json(["mensaje" => "listo"]);
     }
 
     public function listarperfilobjeto($id) {
-        /*$perfilobjeto = DB::table('perfilobjeto')->select('perfilobjeto.id as idper', 'perfilobjeto.idPerfil as id', 'perfilobjeto.idObjeto as ids', 'objeto.nombre', 'perfilobjeto.puedeGuardar', 'perfilobjeto.puedeModificar', 'perfilobjeto.puedeEliminar', 'perfilobjeto.puedeListar', 'perfilobjeto.puedeVerReporte', 'perfilobjeto.puedeImprimir')
-            ->join('objeto', 'objeto.id', '=', 'perfilobjeto.idObjeto')
-            ->where('perfilobjeto.idPerfil', $id)
-            ->get('idper', 'id', 'ids', 'nombre', 'puedeGuardar', 'puedeModificar', 'puedeEliminar', 'puedeListar', 'puedeVerReporte', 'puedeImprimir');*/
+       
         $perfilobjeto = DB::table('perfilobjeto')->select('perfilobjeto.id as idper', 'perfilobjeto.idperfil as id', 'perfilobjeto.idobjeto as ids', 'objeto.nombre', 'perfilobjeto.puedeguardar', 'perfilobjeto.puedemodificar', 'perfilobjeto.puedeeliminar', 'perfilobjeto.puedelistar', 'perfilobjeto.puedeverreporte')
                 ->join('objeto', 'objeto.id', '=', 'perfilobjeto.idobjeto')
                 ->join('modulo', 'modulo.id', '=', 'objeto.idmodulo')

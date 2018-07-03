@@ -23,7 +23,7 @@
         <div class="col s12">
                    <?php $idObra=$obra[0]->id; ?>
     <input type="hidden" id="idObra" value="<?php echo $idObra ?>" name="">
-            <button class="waves-effect waves-light btn modal-trigger" data-target="modal1">NUEVO MaterialObra</button>
+            <button class="waves-effect waves-light btn modal-trigger" data-target="modal1">NUEVO Herramienta lObra</button>
         </div>
     </div>
 
@@ -31,7 +31,7 @@
         <thead>
         <th>id</th>
         <th>Obra</th>
-        <th>Material</th>
+        <th>Herramienta</th>
         <th>Cantidad</th>
         <th>Precio</th>
         <th>Editar</th>

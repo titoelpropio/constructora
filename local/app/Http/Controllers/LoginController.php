@@ -72,14 +72,14 @@ class LoginController extends Controller {
         }
         
         if (Auth::attempt(['email' =>$email, 'password' =>$password])) {
-           return    redirect('/Empleados');
+           return    redirect('/index');
          
         }
 //        $sesion=Auth::user();
 //        Session::flash('message-error', 'Datos Incorrectos');
               Session::put('user', null); 
         Session::flash('message', 'Datos Incorrectos');
-        return Redirect::to('/Empleado');
+        return Redirect::to('/');
 //        return response()->json(['messaje', $password]);
 //        if($sesion!=null){
 //          return response()->json(['messaje','no es null']);  

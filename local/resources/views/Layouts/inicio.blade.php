@@ -211,11 +211,11 @@
                                             {
                                             $modulo=DB::select("SELECT * FROM modulo order by orden asc "); //OBTENGO LOS MODULOS DISPONIBLES PARA LA EMPRESA?>
                                             <?php foreach ($modulo as $key => $value): ?>
-                                                <?php $objeto=DB::select("SELECT objeto.* FROM objeto,perfilobjeto WHERE objeto.id=perfilobjeto.idObjeto AND objeto.estado=0 AND objeto.eliminado=0 AND objeto.idmodulo=".$value->id." AND perfilobjeto.idperfil=".Session::get('idPerfil')." AND perfilobjeto.puedelistar=1 "); //OBTENGO LOS OBJETOS DISPONIBLE DE DADO EL MODULO Y EL PERFIL EN CASO Q NO TENGA PERMISO A NINGUN MODULO VERIFIXO CON EL COUNT SI ES 0 NO GENERA EL MODULO.?>
+                                                <?php $objeto=DB::select("SELECT objeto.* FROM objeto,perfilobjeto WHERE objeto.id=perfilobjeto.idObjeto AND objeto.estado=0 AND objeto.eliminado=0 AND objeto.idmodulo=".$value->id." AND perfilobjeto.idperfil=".Session::get('idPerfil')." AND perfilobjeto.puedelistar=1   and perfilobjeto.deleted_at IS NULL"); //OBTENGO LOS OBJETOS DISPONIBLE DE DADO EL MODULO Y EL PERFIL EN CASO Q NO TENGA PERMISO A NINGUN MODULO VERIFIXO CON EL COUNT SI ES 0 NO GENERA EL MODULO.?>
                                               <?php if (count($objeto) > 0): //PREGUNTO SI TIENE ALGUN OBJETO DISPONIBLE EN ESE MODULO PARA Q APARESCA EL MODULO?>
                                                 <li class="bold">
                                                   <a class="collapsible-header  waves-effect waves-cyan">
-                                                   <i class="material-icons">{{$value->icono}}</i>{{$value->nombre}} 
+                                                   <i class="material-icons">{{$value->icono}}</i> &nbsp;&nbsp; {{$value->nombre}} 
                                                   </a>
                                                   <div class="collapsible-body">
                                                     <ul>

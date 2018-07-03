@@ -27,8 +27,8 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(5);
-        return view('usuario.index',compact('users'));
+        // $users = User::paginate(5);
+        // return view('usuario.index',compact('users'));
     }
 
     /**
@@ -49,7 +49,7 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        $verificar = DB::select('select count(*) count from users where users.email="' . $request->email.'"');
+        $verificar = DB::select("select count(*) count from users where users.email='" . $request->usuario."'");
        if ($verificar[0]->count == 0) {
         DB::table('users')->insert(['idempleado'=>$request['id'],'idperfil'=>$request['perfils'],'contra'=>$request['password'],'email'=>$request['usuario'],'password'=>Hash::make($request['password'])]);
         //        DB:table('users')->insert(['name'=>$request->name,'email'=>$request->email,'password'=>Hash::make($request->password)]);

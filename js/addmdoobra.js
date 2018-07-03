@@ -66,7 +66,7 @@ function Mostrar(btn) {
         $("#obras").val(res[0].id_obra);
         $("#idactualizar").val(res[0].id);
         $("#manoobras").val(res[0].id_mano_de_obra);
-           $('#manoobras').manoobra_select();
+           $('#manoobras').material_select();
         $("#cantidads").val(res[0].cantidad);
         $("#precios").val(res[0].precio);
     });

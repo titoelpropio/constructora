@@ -87,7 +87,6 @@ function index(){
 
   public function destroy($id){
       $Cargo=Cargo::find($id);
-      echo $id;
       $Cargo->delete();
       Session::flash('message','Eliminado Correctamente');
      return Redirect::to('/Cargo');

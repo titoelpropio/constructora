@@ -111,7 +111,7 @@ function Mostrar(btn) {
         $("#nombres").val(res[0].nombre);
         $("#idactualizar").val(res[0].id);
         $("#descripcions").val(res[0].descripcion);
-        $("#preciousos").val(res[0].precio_uso);
+        $("#duracions").val(res[0].duracion);
     });
 }
 
