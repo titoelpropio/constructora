@@ -36,9 +36,13 @@
                     <select id="obra" onchange="listardetalleobra(this.value)">
                       <option>Seleccione una obra</option>
                       <?php 
+                       if (!session()->has('idPerfil')) 
+                       {
                         for ($i=0; $i <count($obra) ; $i++) { 
                           echo "<option value='".$obra[$i]->id."'>".$obra[$i]->nombre;
                         }
+                        }
+                        
                        ?>
                     </select>
                   </div>
