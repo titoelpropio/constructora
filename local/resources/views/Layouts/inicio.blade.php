@@ -282,7 +282,7 @@
                                             document.write(new Date().getFullYear());
                                           </script> <a class="grey-text text-darken-2" href="http://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank">CONTRUCTORA-BR</a> Todos los derechos reservados.</span>
                                           <span class="right hide-on-small-only"> Design and Developed by <a class="grey-text text-darken-2" href="https://pixinvent.com/">CONTRUCTORA-BR</a></span>
-                                           <span style="    font-weight: bold;">CATIDAD VISITAS: <span id="quantityvisit">0</span></span>
+                                           <span style="    font-weight: bold;">CANTIDAD VISITAS: <span id="quantityvisit">0</span></span>
                                         </div>
                                       </div>
                                     </footer>
