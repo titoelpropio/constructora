@@ -16,7 +16,8 @@ class LoginController extends Controller {
 
     function index() {
         if (Session::get('user')!=null) {
-        return view('index');
+       $obra=DB::Select('select *from obra where deleted_at IS NULL');
+        return view('index',compact('obra'));
     
        }else{
         return view('Layouts.Log');}
