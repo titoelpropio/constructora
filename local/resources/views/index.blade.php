@@ -29,20 +29,18 @@
                         </div>
                         <p class="header center">Pie Charts</p>
                       </div>
-                    
                     </div>
                   </div>
                   <div class="col s3">
                     <select id="obra" onchange="listardetalleobra(this.value)">
                       <option>Seleccione una obra</option>
                       <?php 
-                       if (session()->has('idPerfil')) 
+                       if (!session()->has('idPerfil')) 
                        {
                         for ($i=0; $i <count($obra) ; $i++) { 
                           echo "<option value='".$obra[$i]->id."'>".$obra[$i]->nombre;
                         }
                         }
-                        
                        ?>
                     </select>
                   </div>

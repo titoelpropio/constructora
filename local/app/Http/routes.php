@@ -11,6 +11,10 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+
+//Configuracion
+Route::resource('Configuracion','ConfiguracionController');
+Route::get('actualizartema/{tema}','ConfiguracionController@actualizartema');
 //mano de obra obra
 
 Route::resource('MdoObra','MdoObraController');

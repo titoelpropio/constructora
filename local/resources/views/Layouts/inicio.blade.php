@@ -366,8 +366,48 @@
     });
 
   </script> -->
+  <style type="text/css">
+    body.layout-semi-dark #main .side-nav{
+      <?php 
+          $tema=DB::Select('select *from configuracion');
+          switch ($tema[0]->tema) {
+            case '1':
+              
+              break;
+            case '2':
+              echo "background:  linear-gradient(45deg, #43484c 50%, #ffffff 100%) !important;";
+              break;
+            case '3':
+              echo "background:  linear-gradient(45deg, #37474f   50%, #37474f 100%) !important;";
+              break;
+            default:
+              # code...
+              break;
+          }
+       ?>
+        
+    }
+    body.layout-semi-dark #main #left-sidebar-nav .brand-sidebar{
+      <?php 
+          switch ($tema[0]->tema) {
+            case '1':
+              
+              break;
+            case '2':
+              echo "background: linear-gradient(45deg, #43484c 0%, #aaacae 100%) !important;";
+              break;
+            case '3':
+              echo "background:  linear-gradient(45deg, #37474f   50%, #37474f   100%) !important;";
+              break;
+            default:
+              # code...
+              break;
+          }
+       ?>
+        
+    }
+  </style>
   <script>
-    var contabilidad_activa = '{{ Session::get('asientos_contables') }}';
     $('input[type=text]').focus(function () {
       $(this).select();
     });
